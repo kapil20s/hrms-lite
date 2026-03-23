@@ -36,7 +36,7 @@ const rowVariants = {
     x: 0,
     transition: {
       delay: i * 0.05,
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 24,
     },
@@ -163,7 +163,7 @@ export default function EmployeesPage() {
             className="pl-9"
           />
         </div>
-        <Select value={deptFilter} onValueChange={setDeptFilter}>
+        <Select value={deptFilter} onValueChange={(val) => setDeptFilter(val ?? "all")}>
           <SelectTrigger className="w-48">
             <SelectValue placeholder="All Departments" />
           </SelectTrigger>

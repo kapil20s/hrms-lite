@@ -31,7 +31,7 @@ const rowVariants = {
     y: 0,
     transition: {
       delay: i * 0.04,
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 24,
     },
@@ -40,7 +40,7 @@ const rowVariants = {
 
 const statusVariants = {
   initial: { scale: 0.8, opacity: 0 },
-  animate: { scale: 1, opacity: 1, transition: { type: "spring", stiffness: 500, damping: 25 } },
+  animate: { scale: 1, opacity: 1, transition: { type: "spring" as const, stiffness: 500, damping: 25 } },
   exit: { scale: 0.8, opacity: 0, transition: { duration: 0.15 } },
 };
 

@@ -17,7 +17,7 @@ const sidebarItemVariants = {
     x: 0,
     transition: {
       delay: 0.1 + i * 0.08,
-      type: "spring",
+      type: "spring" as const,
       stiffness: 300,
       damping: 24,
     },
