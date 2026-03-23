@@ -18,6 +18,7 @@ export interface ApiError {
 // ── Employee ─────────────────────────────────────────────────
 export interface Employee {
   id: number;
+  employee_id: string;
   name: string;
   email: string;
   department: string;
@@ -26,6 +27,7 @@ export interface Employee {
 }
 
 export interface EmployeeCreate {
+  employee_id: string;
   name: string;
   email: string;
   department: string;

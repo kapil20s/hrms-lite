@@ -20,7 +20,7 @@ services:
           name: hrms-lite-db
           property: connectionString
       - key: CORS_ORIGINS
-        value: https://hrms-lite.vercel.app
+        value: https://hrms-lite-psi-navy.vercel.app
       - key: PYTHON_VERSION
         value: "3.11.0"
     healthCheckPath: /health

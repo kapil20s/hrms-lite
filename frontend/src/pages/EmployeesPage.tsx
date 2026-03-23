@@ -216,6 +216,7 @@ export default function EmployeesPage() {
             <Table>
               <TableHeader>
                 <TableRow>
+                  <TableHead>Employee ID</TableHead>
                   <TableHead>Name</TableHead>
                   <TableHead>Email</TableHead>
                   <TableHead>Department</TableHead>
@@ -235,6 +236,7 @@ export default function EmployeesPage() {
                       layout
                       className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
                     >
+                      <TableCell className="font-mono text-xs text-muted-foreground">{emp.employee_id}</TableCell>
                       <TableCell className="font-medium">{emp.name}</TableCell>
                       <TableCell className="text-muted-foreground">
                         {emp.email}

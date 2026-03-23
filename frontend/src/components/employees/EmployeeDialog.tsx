@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import type { Employee } from "@/types";
 
 const employeeSchema = z.object({
+  employee_id: z.string().min(1, "Employee ID is required").max(50, "Employee ID too long"),
   name: z.string().min(1, "Name is required").max(100, "Name too long"),
   email: z.string().min(1, "Email is required").email("Invalid email format"),
   department: z.string().min(1, "Department is required").max(100, "Department too long"),
@@ -49,6 +50,7 @@ export function EmployeeDialog({
   const form = useForm<EmployeeFormValues>({
     resolver: zodResolver(employeeSchema),
     defaultValues: {
+      employee_id: "",
       name: "",
       email: "",
       department: "",
@@ -59,12 +61,13 @@ export function EmployeeDialog({
   useEffect(() => {
     if (open) {
       form.reset({
+        employee_id: employee?.employee_id ?? "",
         name: employee?.name ?? "",
         email: employee?.email ?? "",
         department: employee?.department ?? "",
       });
     } else {
-      form.reset({ name: "", email: "", department: "" });
+      form.reset({ employee_id: "", name: "", email: "", department: "" });
     }
   }, [open, employee, form]);
 
@@ -84,6 +87,19 @@ export function EmployeeDialog({
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+            <FormField
+              control={form.control}
+              name="employee_id"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Employee ID</FormLabel>
+                  <FormControl>
+                    <Input placeholder="EMP001" {...field} disabled={isEditing} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="name"
