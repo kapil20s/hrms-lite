@@ -1,19 +1,23 @@
 # HRMS Lite — Human Resource Management System
 
-A full-stack web application for managing employees and tracking daily attendance, built with React and FastAPI.
+A full-stack web application for managing employees and tracking daily attendance, built with React and FastAPI. Features smooth animations powered by Framer Motion, GSAP, and Three.js.
 
 ## Live Demo
 
 - **Frontend**: [https://hrms-lite-psi-navy.vercel.app](https://hrms-lite-psi-navy.vercel.app)
 - **Backend API**: [https://hrms-lite-api-9rhx.onrender.com](https://hrms-lite-api-9rhx.onrender.com)
+- **API Docs**: [https://hrms-lite-api-9rhx.onrender.com/docs](https://hrms-lite-api-9rhx.onrender.com/docs)
+
+> **Note**: The backend is hosted on Render's free tier and spins down after 15 minutes of inactivity. The first request after idle may take ~30 seconds.
 
 ## Features
 
 ### Employee Management
-- Create, read, update, and delete employees
+- Create, read, update, and delete employees with custom Employee ID
 - Search employees by name or email
 - Filter by department
 - Duplicate email detection with meaningful error messages
+- Server-side validation with field-level error details
 
 ### Attendance Tracking
 - Mark daily attendance (present/absent) per employee
@@ -27,11 +31,20 @@ A full-stack web application for managing employees and tracking daily attendanc
 - Department breakdown with per-department stats
 - Auto-refreshes every 30 seconds
 
+### Animations & UI Polish
+- **Framer Motion** — Page transitions, staggered list animations, sidebar active indicator, hover/tap interactions
+- **GSAP** — Animated number counters, scroll-triggered reveals
+- **Three.js** — 3D glass-mesh stat cards on dashboard with floating particles
+- Dark mode support (auto-detects system preference)
+- Loading skeletons, empty states, and error states on every page
+- Toast notifications for all operations
+
 ## Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| **Frontend** | React 18, TypeScript, Vite, Tailwind CSS v4, shadcn/ui |
+| **Frontend** | React 19, TypeScript, Vite 8, Tailwind CSS v4, shadcn/ui |
+| **Animations** | Framer Motion, GSAP, Three.js (@react-three/fiber + drei) |
 | **State Management** | TanStack Query v5 (server state), React Hook Form + Zod (forms) |
 | **Backend** | FastAPI, Python 3.11, SQLAlchemy 2.0, Pydantic v2 |
 | **Database** | PostgreSQL |
@@ -40,22 +53,29 @@ A full-stack web application for managing employees and tracking daily attendanc
 ## Project Structure
 
 ```
-├── app/                    # Backend (FastAPI)
-│   ├── api/v1/             # API routers (employees, attendance)
-│   ├── core/               # Config (pydantic-settings)
-│   ├── db/                 # Database session & engine
-│   ├── models/             # SQLAlchemy models
-│   ├── repositories/       # Data access layer
-│   ├── schemas/            # Pydantic request/response schemas
-│   └── services/           # Business logic layer
-├── frontend/               # Frontend (React + Vite)
+├── app/                        # Backend (FastAPI)
+│   ├── api/v1/                 # API routers (employees, attendance)
+│   ├── core/                   # Config (pydantic-settings)
+│   ├── db/                     # Database session & engine
+│   ├── models/                 # SQLAlchemy models
+│   ├── repositories/           # Data access layer
+│   ├── schemas/                # Pydantic request/response schemas
+│   └── services/               # Business logic layer
+├── frontend/                   # Frontend (React + Vite)
 │   └── src/
-│       ├── api/            # Axios client & API functions
-│       ├── components/     # UI components (layout, employees, attendance, shared)
-│       ├── pages/          # Page components (Dashboard, Employees, Attendance)
-│       ├── types/          # TypeScript type definitions
-│       └── lib/            # Utilities
-├── requirements.txt        # Python dependencies
+│       ├── api/                # Axios client & API functions
+│       ├── components/
+│       │   ├── ui/             # shadcn/ui primitives
+│       │   ├── layout/         # AppLayout (sidebar + topbar)
+│       │   ├── employees/      # Employee dialog & form
+│       │   ├── motion/         # Animation wrappers (Framer Motion, GSAP, Three.js)
+│       │   └── shared/         # PageHeader, StateDisplays, DeleteDialog
+│       ├── pages/              # Dashboard, Employees, Attendance
+│       ├── types/              # TypeScript type definitions
+│       └── lib/                # Utilities
+├── render.yaml                 # Render Blueprint (backend + PostgreSQL)
+├── requirements.txt            # Python dependencies
+├── .env.example                # Backend env template
 └── README.md
 ```
 
@@ -151,7 +171,6 @@ All API endpoints are prefixed with `/api/v1` and return a consistent envelope:
 
 All errors return structured responses with appropriate HTTP status codes:
 
-- `400` — Bad request
 - `404` — Resource not found
 - `409` — Conflict (duplicate email, duplicate attendance)
 - `422` — Validation error (with field-level details)
@@ -166,3 +185,4 @@ All errors return structured responses with appropriate HTTP status codes:
 5. **Bulk attendance** — The bulk endpoint uses an upsert pattern: existing records for the same employee+date are updated rather than rejected.
 6. **Tables auto-create** — On server startup, SQLAlchemy creates tables if they don't exist (`create_all`). For production, Alembic migrations are recommended.
 7. **Time zone** — All dates are naive (no timezone). The frontend sends dates in `YYYY-MM-DD` format.
+8. **Code splitting** — Pages are lazy-loaded with `React.lazy()`. Animation libraries (Three.js, GSAP, Framer Motion) are split into separate vendor chunks for optimal loading.
