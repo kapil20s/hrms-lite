@@ -6,8 +6,8 @@ A full-stack web application for managing employees and tracking daily attendanc
 
 ## Live Demo
 
-- **Frontend**: [https://hrms-lite.vercel.app](https://hrms-lite.vercel.app)
-- **Backend API**: [https://hrms-lite-api.onrender.com](https://hrms-lite-api.onrender.com)
+- **Frontend**: [https://hrms-lite-psi-navy.vercel.app](https://hrms-lite-psi-navy.vercel.app)
+- **Backend API**: [https://hrms-lite-api-9rhx.onrender.com](https://hrms-lite-api-9rhx.onrender.com)
 
 ## Features
 
