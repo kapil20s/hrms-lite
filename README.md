@@ -2,8 +2,6 @@
 
 A full-stack web application for managing employees and tracking daily attendance, built with React and FastAPI.
 
-![Dashboard](screenshots/dashboard.png)
-
 ## Live Demo
 
 - **Frontend**: [https://hrms-lite-psi-navy.vercel.app](https://hrms-lite-psi-navy.vercel.app)
@@ -168,9 +166,3 @@ All errors return structured responses with appropriate HTTP status codes:
 5. **Bulk attendance** — The bulk endpoint uses an upsert pattern: existing records for the same employee+date are updated rather than rejected.
 6. **Tables auto-create** — On server startup, SQLAlchemy creates tables if they don't exist (`create_all`). For production, Alembic migrations are recommended.
 7. **Time zone** — All dates are naive (no timezone). The frontend sends dates in `YYYY-MM-DD` format.
-
-## Screenshots
-
-| Dashboard | Employees | Attendance |
-|-----------|-----------|------------|
-| ![Dashboard](screenshots/dashboard.png) | ![Employees](screenshots/employees.png) | ![Attendance](screenshots/attendance.png) |

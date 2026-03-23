@@ -50,12 +50,6 @@ htmlcov/
 .mypy_cache/
 .ruff_cache/
 
-# Internal tooling
-.sisyphus/
-
-# Local screenshots
-screenshots/
-
 # Node (root level)
 node_modules/
 
