@@ -70,7 +70,7 @@ A full-stack web application for managing employees and tracking daily attendanc
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/hrms-lite.git
+git clone https://github.com/kapil20s/hrms-lite.git
 cd hrms-lite
 ```
 
